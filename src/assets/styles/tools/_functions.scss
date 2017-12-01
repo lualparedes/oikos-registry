@@ -1,0 +1,29 @@
+// Convert to rem
+// ¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+// This function takes a value in px and returns the ratio of he entry with the
+// font size of the :root
+// @notes
+// [1] You need to divide by 1px in order to strip the unit
+@function rem($px) {
+	@return unquote(($px / ($f-base-size / 1px))+'rem'); // [1]
+}
+
+// Define z-index
+// ¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+// Assigns a propper z-index value based on the position of the element in a 
+// map which contains the list of elements with a z-index property. The closer
+// an item is to the first position in the list, the higher its z-index will 
+// be (it works visually as a layer stack)
+// @authors 
+//     Engage Interactive UK
+@function z($name) {
+    @if index($z-indexes, $name) {
+        @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+    } @else {
+        @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+        @return null;
+    }
+}
+$z-indexes: (
+    	
+);

@@ -1,0 +1,67 @@
+@import '../../assets/styles/tools/variables';
+@import '../../assets/styles/tools/functions';
+@import '../../assets/styles/tools/mixins';
+
+.Menu {
+    position: fixed;
+    top: 0;
+    left: -220px;
+    background: $c-dark;
+    height: 100vh;
+    color: #fff;
+    width: 200px;
+    box-shadow: $s-level1--right;
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    border-bottom: 1px solid $c-accent;
+    &__icon {
+        margin-left: 8px;
+        font-size: 28px;
+    }
+}
+
+.menu-btn {
+    margin: 20px auto;
+    display: block;
+}
+
+.menu-items {
+    &__item {
+        @include center-flex();
+        cursor: pointer;
+        position: relative;
+        height: 44px;
+        transition: all .2s ease;
+        &:hover {
+            background: $c-base;
+        }
+        &--selected {
+            background: $c-base;
+            font-family: 'hk_groteskbold';
+            &::before {
+                @include pseudo(8px, 44px, $c-accent);
+                left: 0;
+                top: 0;
+            }
+        }
+    }
+}
+
+.menu-footer {
+    @include center-flex();
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 16px;
+    height: 48px;
+    width: 100%;
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

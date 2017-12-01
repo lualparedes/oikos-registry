@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    &::selection {
+        background: $c-selection;
+        color: invert($c-selection);
+    }
+}
+
+html {
+    font-family: $f-body;
+    font-weight: 300;
+    color: $c-text;
+    font-size: $f-base-size;
+    line-height: 1;
+}
+
+body {
+    min-height: 100vh;
+    background: $c-bg;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+h1, h2, h3,
+h4, h5, h6, 
+pre, code {
+    font-size:100%;
+    font-weight:normal;
+}
+
+ol,
+ul {
+    list-style:none;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    background: transparent;
+}
+
+img {
+    width: 100%;
+    display: block;
+}

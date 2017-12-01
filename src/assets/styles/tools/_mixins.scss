@@ -1,0 +1,56 @@
+// Center flex
+// ¨¨¨¨¨¨¨¨¨¨¨
+// Center an element using flexbox. Applied to the container.
+@mixin center-flex() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Center absolute
+// ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+// Center an element using absolute positioning. Applied to the element itself.
+@mixin center-absolute($x: false, $y: false){
+	position: absolute;
+	@if ($x and $y) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+	} @else if ($x) {
+		left: 50%;
+		transform: translateX(-50%);
+	} @else {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+// Pseudo
+// ¨¨¨¨¨¨
+// Boilerplate for pseudo elements
+@mixin pseudo($w, $h, $bg, $content: "") {
+	position: absolute;
+	content: $content;
+	background: $bg;
+	width: $w;
+	height: $h;
+}
+
+// Responsive block
+// ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+// Adds responsive support for embeded media (videos, etc.)
+// @notes
+// [1] It must always be 100%. If you want to use a different width, then add a
+//     container and set it to the width you want
+// [2] Because the emebeded media might need to be absolute positioned
+@mixin responsive-block($x: 16, $y: 9) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    padding-bottom: $padding;
+    width: 100%; // [1]
+    position: relative; // [2]
+    & > iframe {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+}

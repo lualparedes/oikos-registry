@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'icomoon';
+  //src: url('../fonts/hkgrotesk-bold-webfont.ttf') format('truetype');
+  src:  url('./assets/fonts/icomoon.eot?xcsnjo');
+  src:  url('./assets/fonts/icomoon.eot?xcsnjo#iefix') format('embedded-opentype'),
+    url('./assets/fonts/icomoon.ttf?xcsnjo') format('truetype'),
+    url('./assets/fonts/icomoon.woff?xcsnjo') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+  content: "\e900";
+}
+.icon-back:before {
+  content: "\e901";
+}
+.icon-close:before {
+  content: "\e902";
+}
+.icon-down:before {
+  content: "\e903";
+}
+.icon-edit:before {
+  content: "\e904";
+}
+.icon-menu:before {
+  content: "\e905";
+}
+.icon-up:before {
+  content: "\e906";
+}
+.icon-up-down:before {
+  content: "\e907";
+}

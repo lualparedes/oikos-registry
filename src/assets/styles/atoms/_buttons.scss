@@ -1,0 +1,22 @@
+.btn {
+    height: 44px;
+    border-radius: 22px;
+}
+
+// @notes
+// [1] For the sake of vertical alignment
+.btn-main {
+    border: 1px solid #fff;
+    padding: 0 16px;
+    color: #fff;
+    transition: all .2s ease;
+    &:hover {
+        border: 1px solid $c-accent;
+        background: $c-accent;
+    }
+    span:last-child { // [1]
+        padding-left: 4px;
+        position: relative;
+        top: -2px;
+    }
+}
