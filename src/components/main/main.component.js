@@ -19,7 +19,7 @@ export default class Main extends Component {
                 </header>
                 <div className="main-content">
                     <div className="main-table">
-                        hoho
+                        hohhho
                     </div>
                 {/*
                     <table className="main-table">

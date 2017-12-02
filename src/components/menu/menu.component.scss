@@ -4,6 +4,7 @@
 
 .Menu {
     position: fixed;
+    z-index: z(Menu);
     top: 0;
     left: -220px;
     background: $c-dark;
@@ -21,6 +22,9 @@
     &__icon {
         margin-left: 8px;
         font-size: 28px;
+    }
+    &__logo {
+        display: none;
     }
 }
 
@@ -62,6 +66,23 @@
     a {
         &:hover {
             text-decoration: underline;
+        }
+    }
+}
+
+@media screen and (min-width:"700px") {
+    .Menu {
+        left: 0;
+        box-shadow: 0 0 0;
+    }
+    .menu-header {
+        height: 88px;
+        &__icon {
+            display: none;
+        }
+        &__logo {
+            margin: auto;
+            display: block;
         }
     }
 }

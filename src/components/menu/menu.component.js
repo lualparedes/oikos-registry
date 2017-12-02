@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './menu.component.css';
+import Logo from './logo.svg';
 
 export default class Menu extends Component {
 
@@ -12,6 +13,9 @@ export default class Menu extends Component {
             <div className="Menu">
                 <div className="menu-header">
                     <span className="icon-back menu-header__icon"></span>
+                    <div className="menu-header__logo">
+                        <img src={Logo} alt="Logo"/>
+                    </div>
                 </div>
                 <button className="btn btn-main menu-btn">
                     <span className="icon-add"></span>
