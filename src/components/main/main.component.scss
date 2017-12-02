@@ -2,6 +2,15 @@
 @import '../../assets/styles/tools/functions';
 @import '../../assets/styles/tools/mixins';
 
+th,
+td {
+    padding: 8px;
+    white-space: nowrap;
+    &:not(:last-child) {
+        border-left: 1px solid $c-bg--dark;
+    }
+}
+
 .Main {
     position: relative;
     height: 100vh;
@@ -35,7 +44,7 @@
     bottom: 0;
 }
 
-.main-table {
+.main-table-container {
     border: 1px solid $c-border;
     border-radius: 4px;
     position: absolute;
@@ -44,6 +53,9 @@
     bottom: 20px;
     left: 20px;
     overflow: scroll;
+}
+
+.main-table {
     &__header {
         font-family: 'hk_groteskbold';
         background: $c-bg--dark;
@@ -54,6 +66,26 @@
         }
         &:hover {
             background: $c-selection;
+        }
+    }
+}
+
+.edit-trigger {
+    position: relative;
+    padding-left: 40px;
+    cursor: pointer;
+    &::before {
+        @include pseudo(auto, auto, transparent, '\e904');
+        @include center-absolute(false, true);
+        font-family: 'icomoon';
+        font-size: 28px;
+        left: 8px;
+        opacity: 0;
+    }
+    &:hover {
+        text-decoration: underline;
+        &::before {
+            opacity: .75;
         }
     }
 }
