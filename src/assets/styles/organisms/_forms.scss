@@ -1,0 +1,31 @@
+label {
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    font-family: 'hk_groteskbold';
+    margin: 24px 0 4px 0;
+}
+
+.in {
+    border-bottom: 2px solid $c-border;
+    padding: 4px 0;
+    height: 44px;
+    &:focus {
+        border-bottom: 2px solid $c-base;
+        outline: 0;
+    }
+}
+
+.selection {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+    height: 44px;
+    background: $c-bg;
+    border-radius: 4px;
+    border: 1px solid $c-border;
+    &:focus {
+        outline: 0;
+        border: 1px solid $c-base;
+    }
+}
