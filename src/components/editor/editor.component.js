@@ -108,10 +108,10 @@ export default class Editor extends Component {
                                 <button className="btn btn-option btn-option--main">Save</button>
                             </div>
                         </div>
+                        <ModalSelect />
+                        <ModalWarn />
                     </div>
-                </div>
-                <ModalSelect />
-                <ModalWarn />
+                </div>                
             </div>
         );
     }

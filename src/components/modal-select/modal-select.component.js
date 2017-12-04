@@ -21,7 +21,7 @@ export default class ModalSelect extends Component {
                             <button className="btn btn-option btn-option--main">Save</button>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         );
     }
