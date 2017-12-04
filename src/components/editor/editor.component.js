@@ -17,7 +17,7 @@ export default class Editor extends Component {
     render() {
         return (
             <div className="Editor">
-                <div className="editor-backdrop">
+                <div className="editor-backdrop backdrop">
                     <div className="editor-modal">
                         <div className="editor-header">
                             <h1 className="editor-header__title">{this.state.editorTitle}</h1>

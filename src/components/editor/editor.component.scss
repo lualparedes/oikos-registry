@@ -3,14 +3,7 @@
 @import '../../assets/styles/tools/mixins';
 
 .editor-backdrop {
-    @include center-flex();
-    position: fixed;
     z-index: z(editor);
-    background: rgba(#000,.5);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
 
 .editor-modal {

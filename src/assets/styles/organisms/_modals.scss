@@ -1,0 +1,22 @@
+.backdrop {
+    @include center-flex();
+    position: fixed;
+    z-index: z(editor);
+    background: rgba(#000,.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal {
+    background: #fff;
+    width: 90%;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: $s-level1;
+    &__content {
+        line-height: 1.3;
+        margin-bottom: 40px;
+    }
+}

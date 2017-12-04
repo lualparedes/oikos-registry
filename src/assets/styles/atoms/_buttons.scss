@@ -23,7 +23,7 @@
 }
 
 .btn-option {
-    width: 100px;
+    min-width: 100px;
     font-family: 'hk_groteskbold';
     &--main {
         border: 2px solid $c-dark;
