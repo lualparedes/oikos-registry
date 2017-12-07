@@ -2,10 +2,44 @@ import React, { Component } from 'react';
 import './menu.component.css';
 import Logo from './logo.svg';
 
+import { openEditor } from '../../actions';
+import { g } from '../../assets/scripts/utils';
+
 export default class Menu extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    openEditor = () => {
+        this.props.store.dispatch(openEditor());
+        console.log(this.props.store.getState().isEditorOpen);
+        document.querySelector('.editor-backdrop').style.display = 'flex';
+        this.showEditor();
+    }
+
+    // or what about a sort of service?
+    showEditor() {
+        g('.js-editorModal').classList.add('a-modal-show');
+        g('.js-editorBackdrop').classList.add('a-backdrop-show');
+
+        if (g('.js-editorModal').classList.contains('a-modal-hide')) {
+            g('.js-editorModal').classList.remove('a-modal-hide');
+            g('.js-editorBackdrop').classList.remove('a-backdrop-hide');
+        }
+    }
+
+    // for the editor component
+    hideEditor() {
+        g('.js-modal').classList.add('a-modal-hide');
+        g('.js-backdropModal').classList.add('a-backdrop-hide');
+        g('.js-modal').classList.remove('a-modal-show');
+        g('.js-backdropModal').classList.remove('a-backdrop-show');
+
+        setTimeout(() => {
+            g('.js-modal').classList.remove('a-modal-hide');
+            g('.js-backdropModal').classList.remove('a-backdrop-hide');
+        }, 1000);        
     }
 
     render() {
@@ -17,7 +51,7 @@ export default class Menu extends Component {
                         <img src={Logo} alt="Logo"/>
                     </div>
                 </div>
-                <button className="btn btn-main menu-btn">
+                <button className="btn btn-main menu-btn" onClick={this.openEditor}>
                     <span className="icon-add"></span>
                     <span>Add new</span>
                 </button>

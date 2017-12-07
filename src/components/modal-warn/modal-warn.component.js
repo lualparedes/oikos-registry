@@ -10,11 +10,11 @@ export default class ModalWarn extends Component {
     render() {
         return (
             <div className="ModalWarn">
-                <div className="modal-backdrop backdrop">
-                    <div className="modal">
+                <div className="backdrop backdrop--modal js-modalWarnBackdrop">
+                    <div className="modal js-modalWarnModal">
                         <div className="modal__content">
                             You need to fill<br />
-                            the name field 
+                            the name field
                         </div>
                         <div className="btn-row">
                             <button className="btn btn-option btn-option--main">Ok</button>

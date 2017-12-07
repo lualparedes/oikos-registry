@@ -3,8 +3,8 @@
 @import '../../assets/styles/tools/mixins';
 
 .editor-backdrop {
-    position: fixed;
-    z-index: z(editor);
+    display: none;
+    
 }
 
 .editor-modal {

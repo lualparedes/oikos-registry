@@ -1,0 +1,1 @@
+export const g = (selector) => document.querySelector(selector);

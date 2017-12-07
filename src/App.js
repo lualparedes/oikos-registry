@@ -7,11 +7,12 @@ import Main from './components/main/main.component';
 
 
 class App extends Component {
+    
     render() {
         return (
             <div className="App">
-                <Menu />
-                <Main />
+                <Menu store={this.props.store} />
+                <Main store={this.props.store} />
             </div>            
         );
     }

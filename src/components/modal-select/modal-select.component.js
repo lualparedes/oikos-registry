@@ -10,8 +10,8 @@ export default class ModalSelect extends Component {
     render() {
         return (
             <div className="ModalSelect">
-                <div className="modal-backdrop backdrop">
-                    <div className="modal">
+                <div className="backdrop backdrop--modal js-modalSelectBackdrop">
+                    <div className="modal js-modalSelectModal">
                         <div className="modal__content">
                             You have unsaved changes.<br />
                             Do you want to save them?

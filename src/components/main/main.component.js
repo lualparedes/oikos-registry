@@ -91,7 +91,7 @@ export default class Main extends Component {
                         </div>
                     </div>
                 </div>
-                <Editor />
+                <Editor store={this.props.store} />
             </div>
         );
     }

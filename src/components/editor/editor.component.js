@@ -17,8 +17,8 @@ export default class Editor extends Component {
     render() {
         return (
             <div className="Editor">
-                <div className="editor-backdrop backdrop">
-                    <div className="editor-modal">
+                <div className="backdrop backdrop--editor js-editorBackdrop">
+                    <div className="editor-modal js-editorModal">
                         <div className="editor-header">
                             <h1 className="editor-header__title">{this.state.editorTitle}</h1>
                             <button className="editor-header__btn btn icon-close"></button>
@@ -102,14 +102,20 @@ export default class Editor extends Component {
                                 </select>
                             </form>
                         </div>
+                        {/*
+
+    REMEMBER THAT THIS IS ONLY SHOWN WHEN YOU ACTIVATE ONE OF THE FIELDS
+        PERHAPS ALSO CHECK IF THERE WAS ANY ACTUAL MODIFICATION (LEARN HOW TO USE TIMETRAVEL!!! :O)
+
+                        */}
                         <div className="editor-footer">
                             <div className="btn-row">
                                 <button className="btn btn-option btn-option--secondary">Discard</button>
                                 <button className="btn btn-option btn-option--main">Save</button>
                             </div>
                         </div>
-                        <ModalSelect />
-                        <ModalWarn />
+                        <ModalSelect store={this.props.store} />
+                        <ModalWarn store={this.props.store} />
                     </div>
                 </div>                
             </div>
