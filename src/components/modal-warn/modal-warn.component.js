@@ -11,7 +11,7 @@ export default class ModalWarn extends Component {
         return (
             <div className="ModalWarn">
                 <div className="backdrop backdrop--modal js-modalWarnBackdrop">
-                    <div className="modal js-modalWarnModal">
+                    <div className="modal modal--warn js-modalWarnModal">
                         <div className="modal__content">
                             You need to fill<br />
                             the name field

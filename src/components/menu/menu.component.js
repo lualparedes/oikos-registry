@@ -14,7 +14,7 @@ export default class Menu extends Component {
     openEditor = () => {
         this.props.store.dispatch(openEditor());
         console.log(this.props.store.getState().isEditorOpen);
-        document.querySelector('.editor-backdrop').style.display = 'flex';
+        document.querySelector('.backdrop--editor').style.display = 'flex';
         this.showEditor();
     }
 

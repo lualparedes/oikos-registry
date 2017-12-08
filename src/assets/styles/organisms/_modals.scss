@@ -1,5 +1,9 @@
+// @notes
+// [1] Gets animated
 .backdrop {
     @include center-flex();
+    transform: scale(0, 0); // [1]
+    opacity: 0; // [1]
     background: rgba(#000,.5);
     top: 0;
     left: 0;
@@ -19,15 +23,39 @@
     @include center-flex;
     flex-wrap: wrap;
     background: #fff;
-    width: 90%;
-    padding: 40px;
-    border-radius: 4px;
-    box-shadow: $s-level1;
-    max-width: 360px;
     &__content {
         width: 100%;
         text-align: center;
         line-height: 1.3;
         margin-bottom: 40px;
+    }
+    &--select,
+    &--warn {
+        width: 90%;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: $s-level1;
+        max-width: 360px;
+    }
+    &--editor {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:"700px") {
+    .modal {
+        &--editor {
+            height: 80vh;
+            min-height: 400px;
+            max-height: 1200px;
+            width: 60%;
+            max-width: 900px;
+            border-radius: 4px;
+            overflow-y: hidden;
+            box-shadow: $s-level1;
+            border: 1px solid $c-border;
+        }
     }
 }

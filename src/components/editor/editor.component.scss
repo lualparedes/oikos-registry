@@ -2,23 +2,14 @@
 @import '../../assets/styles/tools/functions';
 @import '../../assets/styles/tools/mixins';
 
-.editor-backdrop {
-    display: none;
-    
-}
-
-.editor-modal {
-    position: relative;
-    background: #fff;
-    height: 100vh;
-    width: 100%;
-}
-
 .editor-header {
-    position: relative;
+    position: absolute;
     background: $c-base;
     color: #fff;
     height: 48px;
+    width: 100%;
+    top: 0;
+    left: 0;
     font-family: 'hk_groteskbold';
     &__title {
         @include center-absolute(true, true);
@@ -59,17 +50,6 @@
 }
 
 @media screen and (min-width:"700px") {
-    .editor-modal {
-        height: 80vh;
-        min-height: 400px;
-        max-height: 1200px;
-        width: 60%;
-        max-width: 900px;
-        border-radius: 4px;
-        overflow-y: hidden;
-        box-shadow: $s-level1;
-        border: 1px solid $c-border;
-    }
     // @notes
     // [1] For the sake of vertical align
     .editor-header {

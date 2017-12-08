@@ -18,7 +18,7 @@ export default class Editor extends Component {
         return (
             <div className="Editor">
                 <div className="backdrop backdrop--editor js-editorBackdrop">
-                    <div className="editor-modal js-editorModal">
+                    <div className="modal modal--editor js-editorModal">
                         <div className="editor-header">
                             <h1 className="editor-header__title">{this.state.editorTitle}</h1>
                             <button className="editor-header__btn btn icon-close"></button>

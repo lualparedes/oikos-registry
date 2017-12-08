@@ -11,7 +11,7 @@ export default class ModalSelect extends Component {
         return (
             <div className="ModalSelect">
                 <div className="backdrop backdrop--modal js-modalSelectBackdrop">
-                    <div className="modal js-modalSelectModal">
+                    <div className="modal modal--select js-modalSelectModal">
                         <div className="modal__content">
                             You have unsaved changes.<br />
                             Do you want to save them?
