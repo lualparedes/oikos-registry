@@ -12,6 +12,10 @@
     color: #fff;
     width: 200px;
     box-shadow: $s-level1--right;
+    transition: all .2s ease;
+    &--open {
+        left: 0;
+    }
 }
 
 .menu-header {

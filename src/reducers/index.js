@@ -1,22 +1,58 @@
 const initialState = {
-    isEditorOpen: false,
-    isModalSelectOpen: false,
-    isModalWarnOpen: false
+    global: {
+        currentTable: 'Current members'
+    },
+    editor: {
+        title: 'Add new member',
+        name: '',
+        status: '',
+        carnet: '',
+        idNumber: '',
+        email: '',
+        phoneNumberHome: '',
+        phoneNumberMobile: '',
+        major: '',
+        address: '',
+        sex: '',
+        dateOfBirth: {
+            day: '',
+            month: '',
+            year: ''
+        },
+        typeOfBlood: '',
+        allergies: '',
+        diseases: '',
+        emergencyContact1: '',
+        emergencyContact2: '',
+        enrollmentDate: {
+            day: '',
+            month: '',
+            year: ''
+        }
+    }
 };
 
 export function reducer(state = initialState, action) {
     switch(action.type) {
 
-        case 'EDITOR_OPENS':
-            return { ...state, isEditorOpen: true }
+        case 'ADD_NEW':
+            return initialState;
         break;
 
-        case 'MODAL_SELECT_OPENS':
-            return { ...state, isModalSelectOpen: true }
+        case 'EDIT_RECORD':
+            return { 
+                ...state, 
+                editor: action.payload
+            };
         break;
 
-        case 'MODAL_WARN_OPENS':
-            return { ...state, isModalWarnOpen: true }
+        case 'CHANGE_TABLE':
+            return {
+                global: {
+                    currentTable: action.payload
+                },
+                ...state
+            }
         break;
 
         default:

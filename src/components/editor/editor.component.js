@@ -5,13 +5,17 @@ import ModalSelect from '../modal-select/modal-select.component';
 import ModalWarn from '../modal-warn/modal-warn.component';
 import DatePicker from '../date-picker/date-picker.component';
 
+import { hide } from '../../services/modals.service';
+
 export default class Editor extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            editorTitle: 'Add new member'
-        };
+        this.store = this.props.store;
+    }
+
+    hideEditor() {
+        hide('editor');
     }
 
     render() {
@@ -20,16 +24,27 @@ export default class Editor extends Component {
                 <div className="backdrop backdrop--editor js-editorBackdrop">
                     <div className="modal modal--editor js-editorModal">
                         <div className="editor-header">
-                            <h1 className="editor-header__title">{this.state.editorTitle}</h1>
-                            <button className="editor-header__btn btn icon-close"></button>
+                            <h1 className="editor-header__title">
+                                {this.store.getState().editor.title}
+                            </h1>
+                            <button 
+                                className="editor-header__btn btn icon-close"
+                                onClick={this.hideEditor}
+                            ></button>
                         </div>
                         <div className="editor-content">
                             <form>
                                 <label htmlFor="name">Name</label>
-                                <input className="in" type="text" id="name"/>
+                                <input 
+                                    className="in" type="text" id="name" 
+                                    value={this.store.getState().editor.name}
+                                />
 
                                 <label htmlFor="satus">Status</label>
-                                <select className="selection" name="" id="satus">
+                                <select 
+                                    className="selection" name="" id="satus" 
+                                    value={this.store.getState().editor.status}
+                                >
                                     <option value="active">Active</option>
                                     <option value="passive">Passive</option>
                                     <option value="candidate">Candidate</option>
@@ -39,67 +54,101 @@ export default class Editor extends Component {
                                 </select>
 
                                 <label htmlFor="carnet">Carnet</label>
-                                <input className="in" type="text" id="carnet"/>
+                                <input 
+                                    className="in" type="text" id="carnet"
+                                    value={this.store.getState().editor.carnet}
+                                />
 
                                 <label htmlFor="id-number">ID number</label>
-                                <input className="in" type="text" id="id-number"/>
+                                <input 
+                                    className="in" type="text" id="id-number"
+                                    value={this.store.getState().editor.idNumber}
+                                />
 
                                 <label htmlFor="email">Email</label>
-                                <input className="in" type="text" id="email"/>
+                                <input 
+                                    className="in" type="text" id="email"
+                                    value={this.store.getState().editor.email}
+                                />
 
                                 <label htmlFor="phone-number-home">Phone number (home)</label>
-                                <input className="in" type="text" id="phone-number-home"/>
+                                <input 
+                                    className="in" type="text" id="phone-number-home"
+                                    value={this.store.getState().editor.phoneNumberHome}
+                                />
 
                                 <label htmlFor="phone-number-mobile">Phone number (mobile)</label>
-                                <input className="in" type="text" id="phone-number-mobile"/>
+                                <input 
+                                    className="in" type="text" id="phone-number-mobile"
+                                    value={this.store.getState().editor.phoneNumberMobile}
+                                />
 
                                 <label htmlFor="major">Major</label>
-                                <input className="in" type="text" id="major"/>
+                                <input 
+                                    className="in" type="text" id="major"
+                                    value={this.store.getState().editor.major}
+                                />
 
                                 <label htmlFor="address">Address</label>
-                                <input className="in" type="text" id="address"/>
+                                <input 
+                                    className="in" type="text" id="address"
+                                    value={this.store.getState().editor.address}
+                                />
 
                                 <label htmlFor="sex">Sex</label>
-                                <select className="selection" name="" id="sex">
+                                <select 
+                                    className="selection" name="" id="sex"
+                                    value={this.store.getState().editor.sex.toLowerCase()}
+                                >
                                     <option value="m">M</option>
                                     <option value="f">F</option>
                                 </select>
 
                                 <label htmlFor="date-of-birth">Date of birth</label>
-                                <DatePicker id="date-of-birth"/>
+                                <DatePicker id="date-of-birth" store={this.props.store}/>
 
                                 <label htmlFor="type-of-blood">Type of blood</label>
-                                <select className="selection" name="" id="type-of-blood">
-                                    <option value="o-positive">O+</option>
-                                    <option value="o-negative">O-</option>
-                                    <option value="a-positive">A+</option>
-                                    <option value="a-negative">A-</option>
-                                    <option value="b-positive">B+</option>
-                                    <option value="b-negative">B-</option>
-                                    <option value="ab-positive">AB+</option>
-                                    <option value="ab-negative">AB-</option>
+                                <select 
+                                    className="selection" name="" id="type-of-blood"
+                                    value={this.store.getState().editor.typeOfBlood.toLowerCase()}
+                                >
+                                    <option value="--">--</option>
+                                    <option value="o+">O+</option>
+                                    <option value="o-">O-</option>
+                                    <option value="a+">A+</option>
+                                    <option value="a-">A-</option>
+                                    <option value="b+">B+</option>
+                                    <option value="b-">B-</option>
+                                    <option value="ab+">AB+</option>
+                                    <option value="ab-">AB-</option>
                                 </select>
 
                                 <label htmlFor="allergies">Allergies</label>
-                                <input className="in" type="text" id="allergies"/>
+                                <input 
+                                    className="in" type="text" id="allergies"
+                                    value={this.store.getState().editor.allergies}
+                                />
 
                                 <label htmlFor="diseases">Diseases</label>
-                                <input className="in" type="text" id="diseases"/>
+                                <input 
+                                    className="in" type="text" id="diseases"
+                                    value={this.store.getState().editor.diseases}
+                                />
 
                                 <label htmlFor="emergency-contact-1">Emergency contact 1</label>
-                                <input className="in" type="text" id="emergency-contact-1"/>
+                                <input 
+                                    className="in" type="text" id="emergency-contact-1"
+                                    value={this.store.getState().editor.emergencyContact1}
+                                />
 
                                 <label htmlFor="emergency-contact-2">Emergency contact 2</label>
-                                <input className="in" type="text" id="emergency-contact-2"/>
+                                <input 
+                                    className="in" type="text" id="emergency-contact-2"
+                                    value={this.store.getState().editor.emergencyContact2}
+                                />
 
                                 <label htmlFor="enrollment-date">Enrollment date</label>
-                                <DatePicker id="enrollment-date"/>
-
-                                <label htmlFor="been-active">Has been active?</label>
-                                <select className="selection" name="" id="been-active">
-                                    <option value="y">Y</option>
-                                    <option value="n">N</option>
-                                </select>
+                                <DatePicker id="enrollment-date" store={this.props.store}/>
                             </form>
                         </div>
                         {/*

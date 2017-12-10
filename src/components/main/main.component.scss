@@ -17,6 +17,14 @@ td {
     background: #fff;
 }
 
+.maskMain {
+    &::after {
+        @include pseudo(100%, 100%, rgba(#fff, .5));
+        top: 0;
+        left: 0;
+    }
+}
+
 // @notes
 // [1] For the sake of alignment
 .main-header {
@@ -93,6 +101,11 @@ td {
 @media screen and (min-width:"700px") {
     .Main {
         margin-left: 200px;
+    }
+    .maskMain {
+        &::after {
+            display: none;
+        }
     }
     // @notes
     // [1] For the sake of alignment

@@ -2,51 +2,35 @@ import React, { Component } from 'react';
 import './menu.component.css';
 import Logo from './logo.svg';
 
-import { openEditor } from '../../actions';
-import { g } from '../../assets/scripts/utils';
+import { show } from '../../services/modals.service';
+import { hideMenu } from '../../services/menu.service';
+
+import { addNew } from '../../actions';
 
 export default class Menu extends Component {
 
     constructor(props) {
         super(props);
+        this.store = this.props.store;
+    }
+
+    hideMenu() {
+        hideMenu();
     }
 
     openEditor = () => {
-        this.props.store.dispatch(openEditor());
-        console.log(this.props.store.getState().isEditorOpen);
-        document.querySelector('.backdrop--editor').style.display = 'flex';
-        this.showEditor();
-    }
-
-    // or what about a sort of service?
-    showEditor() {
-        g('.js-editorModal').classList.add('a-modal-show');
-        g('.js-editorBackdrop').classList.add('a-backdrop-show');
-
-        if (g('.js-editorModal').classList.contains('a-modal-hide')) {
-            g('.js-editorModal').classList.remove('a-modal-hide');
-            g('.js-editorBackdrop').classList.remove('a-backdrop-hide');
-        }
-    }
-
-    // for the editor component
-    hideEditor() {
-        g('.js-modal').classList.add('a-modal-hide');
-        g('.js-backdropModal').classList.add('a-backdrop-hide');
-        g('.js-modal').classList.remove('a-modal-show');
-        g('.js-backdropModal').classList.remove('a-backdrop-show');
-
-        setTimeout(() => {
-            g('.js-modal').classList.remove('a-modal-hide');
-            g('.js-backdropModal').classList.remove('a-backdrop-hide');
-        }, 1000);        
+        this.store.dispatch(addNew());
+        show('editor');
     }
 
     render() {
         return (
-            <div className="Menu">
+            <div className="Menu js-Menu">
                 <div className="menu-header">
-                    <span className="icon-back menu-header__icon"></span>
+                    <span 
+                        className="icon-back menu-header__icon"
+                        onClick={this.hideMenu}
+                    ></span>
                     <div className="menu-header__logo">
                         <img src={Logo} alt="Logo"/>
                     </div>

@@ -3,21 +3,38 @@ import './main.component.css';
 
 import Editor from '../editor/editor.component';
 
+import { showMenu } from '../../services/menu.service';
+import { show } from '../../services/modals.service';
+
+import { editRecord } from '../../actions';
+
 export default class Main extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            currentTable: 'Current members'
-        }
+        this.store = this.props.store;
+    }
+
+    showMenu() {
+        showMenu();
+    }
+
+    openEditor = (event) => {
+        this.store.dispatch(editRecord(event));
+        show('editor');
     }
 
     render() {
         return (
-            <div className="Main">
+            <div className="Main js-Main">
                 <header className="main-header">
-                    <span className="icon-menu main-header__icon"></span>
-                    <h1 className="main-header__title">{this.state.currentTable}</h1>
+                    <span 
+                        className="icon-menu main-header__icon"
+                        onClick={this.showMenu}
+                    ></span>
+                    <h1 className="main-header__title">
+                        {this.store.getState().global.currentTable}
+                    </h1>
                 </header>
                 <div className="main-content">
                     <div className="main-table-container">
@@ -42,12 +59,11 @@ export default class Main extends Component {
                                         <th>Emergency contact 1</th>
                                         <th>Emergency contact 2</th>
                                         <th>Enrollment date</th>
-                                        <th>Has been active?</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr className="main-table__row">
-                                        <td className="edit-trigger">Pedro Pablo Pérez González</td>
+                                        <td className="edit-trigger" onClick={this.openEditor}>Pedro Pablo Pérez González</td>
                                         <td>Active</td>
                                         <td>12-99999</td>
                                         <td>22222222</td>
@@ -63,11 +79,10 @@ export default class Main extends Component {
                                         <td>N/A</td>
                                         <td>Pedro Pérez Martínez, padre, +58 424 123 4567</td>
                                         <td>María González Hernández, madre, +58 424 123 4567</td>
-                                        <td>January 2014</td>
-                                        <td>Y</td>
+                                        <td>--/1/2014</td>
                                     </tr>
                                     <tr className="main-table__row">
-                                        <td className="edit-trigger">María Fernanda Pérez González</td>
+                                        <td className="edit-trigger" onClick={this.openEditor}>María Fernanda Pérez González</td>
                                         <td>Active</td>
                                         <td>14-99999</td>
                                         <td>22222222</td>
@@ -83,8 +98,7 @@ export default class Main extends Component {
                                         <td>N/A</td>
                                         <td>Pedro Pérez Martínez, padre, +58 424 123 4567</td>
                                         <td>María González Hernández, madre, +58 424 123 4567</td>
-                                        <td>January 2014</td>
-                                        <td>Y</td>
+                                        <td>--/1/2014</td>
                                     </tr>
                                 </tbody>
                             </table>
