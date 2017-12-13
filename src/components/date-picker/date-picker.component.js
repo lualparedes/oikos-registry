@@ -1,22 +1,69 @@
 import React, { Component } from 'react';
 import './date-picker.component.css';
 
+import { updateDateOfBirth, updateEnrollmentDate } from '../../actions';
+
+import { g } from '../../assets/scripts/utils';
+
 export default class DatePicker extends Component {
 
     constructor(props) {
         super(props);
         this.store = this.props.store;
+        this.state = this.props.store.getState().editor;
+    }
+
+    componentWillReceiveProps() {
+        this.setState({ ...this.props.store.getState().editor });
+    }
+
+    handleChange = (e) => {
+
+        e.preventDefault();
+        
+        switch(g('#'+e.target.id).closest('.DatePicker').id) {
+
+            case 'date-of-birth':
+                let newDateOfBirth = {
+                        day: e.target.id === 'date-of-birth-day' ? 
+                            e.target.value :
+                            this.state.dateOfBirth.day,
+                        month: e.target.id === 'date-of-birth-month' ? 
+                            e.target.value :
+                            this.state.dateOfBirth.month,
+                        year: e.target.id === 'date-of-birth-year' ? 
+                            e.target.value :
+                            this.state.dateOfBirth.year,
+                    }
+                this.store.dispatch(updateDateOfBirth(newDateOfBirth));
+            break;
+
+            case 'enrollment-date':
+                let newEnrollmentDate = {
+                        day: e.target.id === 'enrollment-date-day' ? 
+                            e.target.value :
+                            this.state.enrollmentDate.day,
+                        month: e.target.id === 'enrollment-date-month' ? 
+                            e.target.value :
+                            this.state.enrollmentDate.month,
+                        year: e.target.id === 'enrollment-date-year' ? 
+                            e.target.value :
+                            this.state.enrollmentDate.year,
+                    }
+                this.store.dispatch(updateEnrollmentDate(newEnrollmentDate));
+            break;
+        }
     }
 
     render() {
         return (
-            <div className="DatePicker" id={this.props.id}>
+            <div className="DatePicker" id={this.props.id} onChange={this.handleChange}> 
                 <select 
                     className="DatePicker__Day" name="" id={this.props.id+'-day'}
                     value={
                         this.props.id === 'enrollment-date' ?
-                        this.store.getState().editor.enrollmentDate.day :
-                        this.store.getState().editor.dateOfBirth.day
+                        this.state.enrollmentDate.day :
+                        this.state.dateOfBirth.day
                     }
                 >
                     {
@@ -60,8 +107,8 @@ export default class DatePicker extends Component {
                     className="DatePicker__Month" name="" id={this.props.id+'-month'}
                     value={
                         this.props.id === 'enrollment-date' ?
-                        this.store.getState().editor.enrollmentDate.month :
-                        this.store.getState().editor.dateOfBirth.month
+                        this.state.enrollmentDate.month :
+                        this.state.dateOfBirth.month
                     }
                 >
                     {
@@ -86,8 +133,8 @@ export default class DatePicker extends Component {
                     className="DatePicker__Year" type="text" id={this.props.id+'-year'}
                     value={
                         this.props.id === 'enrollment-date' ?
-                        this.store.getState().editor.enrollmentDate.year :
-                        this.store.getState().editor.dateOfBirth.year
+                        this.state.enrollmentDate.year :
+                        this.state.dateOfBirth.year
                     }
                 />
             </div>

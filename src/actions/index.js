@@ -20,9 +20,9 @@ export function changeTable(table) {
     };
 }
 
-export function addNew() {
+export function addNewRecord() {
     return {
-        type: 'ADD_NEW'
+        type: 'ADD_NEW_RECORD'
     };
 }
 
@@ -61,4 +61,18 @@ export function editRecord(e) {
             }
         }
     };
+}
+
+export function updateDateOfBirth(newDateOfBirth) {
+    return {
+        type: 'UPDATE_DATE_OF_BIRTH',
+        payload: newDateOfBirth
+    }
+}
+
+export function updateEnrollmentDate(newEnrollmentDate) {
+    return {
+        type: 'UPDATE_ENROLLMENT_DATE',
+        payload: newEnrollmentDate
+    }
 }

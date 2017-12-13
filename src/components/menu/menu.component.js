@@ -5,7 +5,9 @@ import Logo from './logo.svg';
 import { show } from '../../services/modals.service';
 import { hideMenu } from '../../services/menu.service';
 
-import { addNew } from '../../actions';
+import { addNewRecord } from '../../actions';
+
+import { g } from '../../assets/scripts/utils';
 
 export default class Menu extends Component {
 
@@ -19,8 +21,10 @@ export default class Menu extends Component {
     }
 
     openEditor = () => {
-        this.store.dispatch(addNew());
+        this.store.dispatch(addNewRecord());
         show('editor');
+        g('.editor-content').classList.add('editor-content--active');
+        g('.editor-footer').classList.add('editor-footer--active');
     }
 
     render() {

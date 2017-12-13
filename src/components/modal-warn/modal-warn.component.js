@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import './modal-warn.component.css';
 
+import { hide } from '../../services/modals.service';
+
 export default class ModalWarn extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    hide() {
+        hide('modalWarn');
     }
 
     render() {
@@ -17,7 +23,12 @@ export default class ModalWarn extends Component {
                             the name field
                         </div>
                         <div className="btn-row">
-                            <button className="btn btn-option btn-option--main">Ok</button>
+                            <button 
+                                className="btn btn-option btn-option--main"
+                                onClick={this.hide}
+                            >
+                                Ok
+                            </button>
                         </div>
                     </div>
                 </div>    
