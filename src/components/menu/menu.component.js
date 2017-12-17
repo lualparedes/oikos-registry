@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 import './menu.component.css';
 import Logo from './logo.svg';
 
@@ -44,10 +45,32 @@ export default class Menu extends Component {
                     <span>Add new</span>
                 </button>
                 <ul className="menu-items">
-                    <li className="menu-items__item menu-items__item--selected">Current</li>
-                    <li className="menu-items__item">Honorary</li>
-                    <li className="menu-items__item">Alumni</li>
-                    <li className="menu-items__item">All</li>
+                    <Route exact={true} path="/" render={() => {
+                        console.log('ho');
+                        return [
+                        <Link to="/"><li className="menu-items__item menu-items__item--selected">Current</li></Link>,
+                        <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
+                        <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
+                        <Link to="all"><li className="menu-items__item">All</li></Link>,
+                    ];}}/>
+                    <Route path="/honorary" render={() => ([
+                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                        <Link to="honorary"><li className="menu-items__item menu-items__item--selected">Honorary</li></Link>,
+                        <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
+                        <Link to="all"><li className="menu-items__item">All</li></Link>,
+                    ])}/>
+                    <Route path="/alumni" render={() => ([
+                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                        <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
+                        <Link to="alumni"><li className="menu-items__item menu-items__item--selected">Alumni</li></Link>,
+                        <Link to="all"><li className="menu-items__item">All</li></Link>,
+                    ])}/>
+                    <Route path="/all" render={() => ([
+                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                        <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
+                        <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
+                        <Link to="all"><li className="menu-items__item menu-items__item--selected">All</li></Link>,
+                    ])}/>
                 </ul>
                 <div className="menu-footer">
                     <a target="_blank" rel="noopener noreferrer" href="http://geoikos.com.ve/">Oikos</a>&nbsp;|&nbsp; 

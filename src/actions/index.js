@@ -1,25 +1,3 @@
-export function changeTable(table) {
-    let tableName;
-    switch(table) {
-        case 'current':
-            tableName = 'Current members';
-        break;
-        case 'honorary':
-            tableName = 'honorary members';
-        break;
-        case 'alumni':
-            tableName = 'Alumni';
-        break;
-        case 'all':
-            tableName = 'All members';
-        break;
-    }
-    return {
-        type: 'CHANGE_TABLE',
-        payload: tableName
-    };
-}
-
 export function addNewRecord() {
     return {
         type: 'ADD_NEW_RECORD'
@@ -36,7 +14,7 @@ export function editRecord(e) {
             title:             record[0].innerHTML,
             name:              record[0].innerHTML,
             status:            record[1].innerHTML,
-            carnet:            record[2].innerHTML,
+            cardNumber:        record[2].innerHTML,
             idNumber:          record[3].innerHTML,
             email:             record[4].innerHTML,
             phoneNumberHome:   record[5].innerHTML,

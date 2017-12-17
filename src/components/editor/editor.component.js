@@ -9,7 +9,7 @@ import { show, hide } from '../../services/modals.service';
 
 import { updateDateOfBirth, updateEnrollmentDate } from '../../actions';
 
-import { g } from '../../assets/scripts/utils';
+import { g, clone } from '../../assets/scripts/utils';
 
 export default class Editor extends Component {
 
@@ -34,8 +34,8 @@ export default class Editor extends Component {
             case 'status':
                 this.setState({ status: e.target.value });
             break;
-            case 'carnet':
-                this.setState({ carnet: e.target.value });
+            case 'cardNumber':
+                this.setState({ cardNumber: e.target.value });
             break;
             case 'id-number':
                 this.setState({ idNumber: e.target.value });
@@ -73,39 +73,6 @@ export default class Editor extends Component {
             case 'emergency-contact-2':
                 this.setState({ emergencyContact2: e.target.value });
             break;
-            
-            case 'date-of-birth':
-                let newDateOfBirth = {
-                        day: e.target.id === 'date-of-birth-day' ? 
-                            e.target.value :
-                            this.state.dateOfBirth.day,
-                        month: e.target.id === 'date-of-birth-month' ? 
-                            e.target.value :
-                            this.state.dateOfBirth.month,
-                        year: e.target.id === 'date-of-birth-year' ? 
-                            e.target.value :
-                            this.state.dateOfBirth.year,
-                    }
-                this.store.dispatch(updateDateOfBirth(newDateOfBirth));
-                //this.setState((prevState) => {
-                //    return { dateOfBirth: newDateOfBirth };
-                //});
-            break;
-            case 'enrollment-date':
-                this.setState((prevState) => {
-                    return { enrollmentDate: {
-                        day: e.target.id === 'enrollment-date-day' ? 
-                            e.target.value :
-                            prevState.enrollmentDate.day,
-                        month: e.target.id === 'enrollment-date-month' ? 
-                            e.target.value :
-                            prevState.enrollmentDate.month,
-                        year: e.target.id === 'enrollment-date-year' ? 
-                            e.target.value :
-                            prevState.enrollmentDate.year,
-                    } };
-                });
-            break;
         }
     };
 
@@ -115,23 +82,24 @@ export default class Editor extends Component {
         g('.editor-footer').classList.remove('editor-footer--active');
     }
 
-    save() {
+    save = () => {
         let atLeastItHasTheName = (g('#name').value === '') ? false : true;
 
         if (!atLeastItHasTheName) {
             show('modalWarn');
         }
-    }
+    };
 
-    hideEditor() {
+    // @notes
+    // [1] Verify that it can be closed
+    hideEditor = () => {
         if (g('.editor-content').classList.contains('editor-content--active')) {
-            // verify that it can be closed
-            show('modalSelect');
+            show('modalSelect'); // [1]
         }
         else {
             hide('editor');
         }   
-    }
+    };
 
     showFooter() {
         g('.editor-content').classList.add('editor-content--active');
@@ -176,10 +144,10 @@ export default class Editor extends Component {
                                     <option value="past-candidate">Past candidate (deletes the entry)</option>
                                 </select>
 
-                                <label htmlFor="carnet">Carnet</label>
+                                <label htmlFor="cardNumber">Card number</label>
                                 <input 
-                                    className="in" type="text" id="carnet"
-                                    value={this.state.carnet}
+                                    className="in" type="text" id="cardNumber"
+                                    value={this.state.cardNumber}
                                 />
 
                                 <label htmlFor="id-number">ID number</label>

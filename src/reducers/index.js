@@ -1,14 +1,16 @@
 import { clone } from '../assets/scripts/utils';
 
 const initialState = {
-    global: {
-        currentTable: 'Current members'
+    modalSelect: {
+        message: 'You have unsaved changes. Do you want to save them?',
+        actionMain: 'Save',
+        actionSecondary: 'Discard'
     },
     editor: {
         title: 'Add new member',
         name: '',
         status: '',
-        carnet: '',
+        cardNumber: '',
         idNumber: '',
         email: '',
         phoneNumberHome: '',
@@ -58,15 +60,6 @@ export function reducer(state = initialState, action) {
             let obj = clone(state);
                 obj.editor.enrollmentDate = action.payload;
             return obj;
-        break;
-
-        case 'CHANGE_TABLE':
-            return {
-                global: {
-                    currentTable: action.payload
-                },
-                ...state
-            }
         break;
 
         default:
