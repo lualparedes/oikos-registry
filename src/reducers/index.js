@@ -74,7 +74,10 @@ export function reducer(state = initialState, action) {
         break;
 
         case 'ADD_NEW_RECORD':
-            return initialState;
+            return { 
+                ...state, 
+                editor: action.payload
+            };
         break;
 
         case 'EDIT_RECORD':

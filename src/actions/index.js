@@ -21,7 +21,35 @@ export function updateLocalMemberCollections(collectionName, collection) {
 
 export function addNewRecord() {
     return {
-        type: 'ADD_NEW_RECORD'
+        type: 'ADD_NEW_RECORD',
+        payload: {
+            title: 'Add new member',
+            name: '',
+            status: '',
+            cardNumber: '',
+            idNumber: '',
+            email: '',
+            phoneNumberHome: '',
+            phoneNumberMobile: '',
+            major: '',
+            address: '',
+            sex: '',
+            dateOfBirth: {
+                day: '',
+                month: '',
+                year: ''
+            },
+            typeOfBlood: '',
+            allergies: '',
+            diseases: '',
+            emergencyContact1: '',
+            emergencyContact2: '',
+            enrollmentDate: {
+                day: '',
+                month: '',
+                year: ''
+            }
+        }
     };
 }
 
