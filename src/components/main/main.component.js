@@ -6,30 +6,9 @@ import Editor from '../editor/editor.component';
 
 import { showMenu } from '../../services/menu.service';
 import { show } from '../../services/modals.service';
+import { getMemberCollection } from '../../services/api.service';
 
 import { editRecord } from '../../actions';
-
-function getMembers(thisArg) {
-    const members = ['current', 'honorary', 'alumni'];
-
-    members.forEach((typeOfMember) => {
-        let req = new XMLHttpRequest();
-            req.open('GET', 'https://ancient-lake-42168.herokuapp.com/'+typeOfMember+'-members');
-            req.onreadystatechange = () => {
-                if (req.readyState === XMLHttpRequest.DONE) {
-                    if (req.status === 200) {
-                        let o = {};
-                            o[typeOfMember] = JSON.parse(req.responseText);
-                        thisArg.setState(o);
-                    }
-                    else {
-                        console.log('There was a problem with the request.');
-                    }
-                }
-            };
-            req.send();
-    }); 
-}
 
 function returnRow(member, thisArg) {
     return (
@@ -55,13 +34,16 @@ function returnRow(member, thisArg) {
     );
 }
 
+let i = 0;
+
 export default class Main extends Component {
 
     constructor(props) {
         super(props);
         this.store = this.props.store;
-        this.state = { current: [], honorary: [], alumni: [] };
-        getMembers(this);
+        getMemberCollection('current', this.store);
+        getMemberCollection('honorary', this.store);
+        getMemberCollection('alumni', this.store);
     }
 
     showMenu() {
@@ -129,24 +111,36 @@ export default class Main extends Component {
                                 </thead>
                                 <Route exact={true} path="/" render={() => (
                                     <tbody>
-                                    {this.state.current.map((member) => returnRow(member, this))}
+                                    {this.props.store.getState().memberCollections.current.map(
+                                        (member) => returnRow(member, this)
+                                    )}
                                     </tbody>
                                 )}/>
                                 <Route path="/honorary" render={() => (
                                     <tbody>
-                                    {this.state.honorary.map((member) => returnRow(member, this))}
+                                    {this.props.store.getState().memberCollections.honorary.map(
+                                        (member) => returnRow(member, this)
+                                    )}
                                     </tbody>
                                 )}/>
                                 <Route path="/alumni" render={() => (
                                     <tbody>
-                                    {this.state.alumni.map((member) => returnRow(member, this))}
+                                    {this.props.store.getState().memberCollections.alumni.map(
+                                        (member) => returnRow(member, this)
+                                    )}
                                     </tbody>
                                 )}/>
                                 <Route path="/all" render={() => (
                                     <tbody>
-                                    {this.state.current.map((member) => returnRow(member, this))}
-                                    {this.state.honorary.map((member) => returnRow(member, this))}
-                                    {this.state.alumni.map((member) => returnRow(member, this))}
+                                    {this.props.store.getState().memberCollections.current.map(
+                                        (member) => returnRow(member, this)
+                                    )}
+                                    {this.props.store.getState().memberCollections.honorary.map(
+                                        (member) => returnRow(member, this)
+                                    )}
+                                    {this.props.store.getState().memberCollections.alumni.map(
+                                        (member) => returnRow(member, this)
+                                    )}
                                     </tbody>
                                 )}/>
                             </table>

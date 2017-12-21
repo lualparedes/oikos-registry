@@ -1,10 +1,10 @@
 import { clone } from '../assets/scripts/utils';
 
 const initialState = {
-    modalSelect: {
-        message: 'You have unsaved changes. Do you want to save them?',
-        actionMain: 'Save',
-        actionSecondary: 'Discard'
+    memberCollections: {
+        current: [],
+        honorary: [],
+        alumni: []
     },
     editor: {
         title: 'Add new member',
@@ -37,7 +37,41 @@ const initialState = {
 };
 
 export function reducer(state = initialState, action) {
+
     switch(action.type) {
+
+        case 'UPDATE_CURRENT_MEMBERS':
+            return {
+                ...state,
+                memberCollections: {
+                    current: action.payload,
+                    honorary: state.memberCollections.honorary,
+                    alumni: state.memberCollections.alumni
+                }
+            };
+        break;
+
+        case 'UPDATE_HONORARY_MEMBERS':
+            return {
+                ...state,
+                memberCollections: {
+                    current: state.memberCollections.current,
+                    honorary: action.payload,
+                    alumni: state.memberCollections.alumni
+                }
+            };
+        break;
+
+        case 'UPDATE_ALUMNI_MEMBERS':
+            return {
+                ...state,
+                memberCollections: {
+                    current: state.memberCollections.current,
+                    honorary: state.memberCollections.honorary,
+                    alumni: action.payload
+                }
+            };
+        break;
 
         case 'ADD_NEW_RECORD':
             return initialState;

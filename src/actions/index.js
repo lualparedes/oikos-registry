@@ -1,3 +1,24 @@
+export function updateLocalMemberCollections(collectionName, collection) {
+
+    let type;
+
+    switch(collectionName) {
+        case 'honorary':
+            type = 'UPDATE_HONORARY_MEMBERS';
+        break;
+        case 'alumni':
+            type = 'UPDATE_ALUMNI_MEMBERS';
+        break;
+        default:
+            type = 'UPDATE_CURRENT_MEMBERS';
+    }
+
+    return {
+        type,
+        payload: collection
+    }
+}
+
 export function addNewRecord() {
     return {
         type: 'ADD_NEW_RECORD'
