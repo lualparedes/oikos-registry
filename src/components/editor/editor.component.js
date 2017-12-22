@@ -6,11 +6,13 @@ import ModalWarn from '../modal-warn/modal-warn.component';
 import DatePicker from '../date-picker/date-picker.component';
 
 import { show, hide } from '../../services/modals.service';
-import { createMember, updateMember, deleteMember, findRecordId } from '../../services/api.service';
+import { createMember, updateMember, deleteMember} from '../../services/api.service';
 
 import { updateEditor, updateDateOfBirth, updateEnrollmentDate } from '../../actions';
 
 import { g, clone } from '../../assets/scripts/utils';
+
+let i = 0;
 
 export default class Editor extends Component {
 
@@ -18,6 +20,14 @@ export default class Editor extends Component {
         super(props);
         this.store = this.props.store;
         this.state = this.props.store.getState().editor;
+
+        this.timer = setInterval(() => {
+            console.log(this.store.getState().currentRecordInEdition);
+            i++;
+            if (i > 5) {
+                clearInterval(this.timer);
+            }
+        }, 3000);
     }
 
     componentWillReceiveProps() {
@@ -39,18 +49,25 @@ export default class Editor extends Component {
         switch(statusValue) {
             case 'active':
                 return 'Active';
+            break;
             case 'passive':
                 return 'Passive';
+            break;
             case 'candidate':
                 return 'Candidate';
+            break;
             case 'candidate-star':
                 return 'Candidate*';
+            break;
             case 'honorary':
                 return 'Honorary';
-            case 'alumni':
+            break;
+            case 'alum':
                 return 'Alum';
+            break;
             case 'past-candidate':
                 return 'Past candidate (deletes the entry)';
+            break;
         }
     }
 
@@ -92,6 +109,7 @@ export default class Editor extends Component {
                 case 'Add new member':
                     if (g('#status').value !== 'past-candidate') {
                         createMember(memberData);
+                        hide('editor');
                     }
                     else {
                         this.discard();
@@ -99,16 +117,12 @@ export default class Editor extends Component {
                 break;
                 default:
                     if (g('#status') !== 'past-candidate') {
-                        updateMember(
-                            memberData,
-                            findRecordId(memberData.name, memberData.status, this.store)
-                        );
+                        updateMember(memberData, this.store.getState().currentRecordInEdition);
+                        hide('editor');
                     }
                     else {
-                        deleteMember(
-                            memberData,
-                            findRecordId(memberData.name, memberData.status, this.store)
-                        );
+                        deleteMember(memberData, this.store.getState().currentRecordInEdition);
+                        hide('editor');
                     }
             }
         }

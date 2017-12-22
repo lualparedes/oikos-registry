@@ -6,6 +6,7 @@ const initialState = {
         honorary: [],
         alumni: []
     },
+    currentRecordInEdition: null,
     editor: {
         title: 'Add new member',
         name: '',
@@ -83,7 +84,8 @@ export function reducer(state = initialState, action) {
         case 'EDIT_RECORD':
             return { 
                 ...state, 
-                editor: action.payload
+                currentRecordInEdition: action.payload.currentRecordInEdition,
+                editor: action.payload.editor
             };
         break;
 
@@ -139,6 +141,10 @@ export function reducer(state = initialState, action) {
             return o;
         break;
 
+        // =====================================================================
+        //                      🛠️ REFACTORING CANDIDATE 🛠️
+        // =====================================================================
+        // Can be incorporated with UPDATE_EDITOR
         case 'UPDATE_DATE_OF_BIRTH':
             let o1 = clone(state);
                 o1.editor.dateOfBirth = action.payload;
@@ -150,7 +156,7 @@ export function reducer(state = initialState, action) {
                 o2.editor.enrollmentDate = action.payload;
             return o2;
         break;
-
+        // =====================================================================
         default:
             return state;
     }

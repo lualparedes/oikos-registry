@@ -79,16 +79,14 @@ export function findRecordId(memberName, typeOfMember, store) {
         )
     );
 
-    console.log(typeOfMember);
-    console.log(memberIndex);
-    console.log(store.getState().memberCollections[collection]);//[memberIndex]['_id']);
-
-    //return store.getState().memberCollections[collection][memberIndex]['_id'];
-    return 'ha';
+    return store.getState().memberCollections[collection][memberIndex]['_id'];
 }
 
 export function updateMember(memberData, recordId) {
-    /*
+
+    console.log(memberData.status);
+    console.log(recordId);
+    
     switch(memberData.status) {
         case 'Honorary':
             makeARequest('PUT', memberData, 'honorary', recordId);
@@ -99,7 +97,7 @@ export function updateMember(memberData, recordId) {
         default:
             makeARequest('PUT', memberData, 'current', recordId);
     }
-    */
+    
 }
 
 export function deleteMember(memberData, recordId) {

@@ -49,7 +49,7 @@ export default class Main extends Component {
     }
 
     openEditor = (event) => {
-        this.store.dispatch(editRecord(event));
+        this.store.dispatch(editRecord(event, this.store));
         show('editor');
     }
 
