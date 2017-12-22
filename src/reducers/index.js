@@ -87,16 +87,68 @@ export function reducer(state = initialState, action) {
             };
         break;
 
-        case 'UPDATE_DATE_OF_BIRTH':
+        case 'UPDATE_EDITOR':
             let o = clone(state);
-                o.editor.dateOfBirth = action.payload;
+            switch(action.payload.key) {
+                case 'name':
+                    o.editor.name = action.payload.value;
+                break;
+                case 'status':
+                    o.editor.status = action.payload.value;
+                break;
+                case 'card-number':
+                    o.editor.cardNumber = action.payload.value;
+                break;
+                case 'id-number':
+                    o.editor.idNumber = action.payload.value;
+                break;
+                case 'email':
+                    o.editor.email = action.payload.value;
+                break;
+                case 'phone-number-home':
+                    o.editor.phoneNumberHome = action.payload.value;
+                break;
+                case 'phone-number-mobile':
+                    o.editor.phoneNumberMobile = action.payload.value;
+                break;
+                case 'major':
+                    o.editor.major = action.payload.value;
+                break;
+                case 'address':
+                    o.editor.address = action.payload.value;
+                break;
+                case 'sex':
+                    o.editor.sex = action.payload.value;
+                break;
+                case 'type-of-blood':
+                    o.editor.typeOfBlood = action.payload.value;
+                break;
+                case 'allergies':
+                    o.editor.allergies = action.payload.value;
+                break;
+                case 'diseases':
+                    o.editor.diseases = action.payload.value;
+                break;
+                case 'emergency-contact-1':
+                    o.editor.emergencyContact1 = action.payload.value;
+                break;
+                case 'emergency-contact-2':
+                    o.editor.emergencyContact2 = action.payload.value;
+                break;
+            }
             return o;
         break;
 
+        case 'UPDATE_DATE_OF_BIRTH':
+            let o1 = clone(state);
+                o1.editor.dateOfBirth = action.payload;
+            return o1;
+        break;
+
         case 'UPDATE_ENROLLMENT_DATE':
-            let obj = clone(state);
-                obj.editor.enrollmentDate = action.payload;
-            return obj;
+            let o2 = clone(state);
+                o2.editor.enrollmentDate = action.payload;
+            return o2;
         break;
 
         default:

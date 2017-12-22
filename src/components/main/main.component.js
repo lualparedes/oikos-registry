@@ -34,8 +34,6 @@ function returnRow(member, thisArg) {
     );
 }
 
-let i = 0;
-
 export default class Main extends Component {
 
     constructor(props) {

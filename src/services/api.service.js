@@ -3,26 +3,6 @@ import { updateLocalMemberCollections } from '../actions';
 
 export function getMemberCollection(collectionName, store) {
 
-    /*const members = ['current', 'honorary', 'alumni'];
-
-    members.forEach((typeOfMember) => {
-        let req = new XMLHttpRequest();
-            req.open('GET', 'https://ancient-lake-42168.herokuapp.com/'+typeOfMember+'-members');
-            req.onreadystatechange = () => {
-                if (req.readyState === XMLHttpRequest.DONE) {
-                    if (req.status === 200) {
-                        let o = {};
-                            o[typeOfMember] = JSON.parse(req.responseText);
-                        thisArg.setState(o);
-                    }
-                    else {
-                        console.log('There was a problem with the request.');
-                    }
-                }
-            };
-            req.send();
-    }); */
-
     let req = new XMLHttpRequest();
         req.open('GET', 'https://ancient-lake-42168.herokuapp.com/'+collectionName+'-members');
         req.onreadystatechange = () => {
@@ -30,8 +10,7 @@ export function getMemberCollection(collectionName, store) {
                 if (req.status === 200) {
                     store.dispatch(
                         updateLocalMemberCollections(collectionName, JSON.parse(req.responseText))
-                    );                 
-                    //console.log(JSON.parse(req.responseText));
+                    );
                 }
                 else {
                     console.log('There was a problem with the request.');
@@ -80,7 +59,7 @@ export function createMember(memberData) {
     }    
 }
 
-export function findRecordId(memberName, typeOfMember) {
+export function findRecordId(memberName, typeOfMember, store) {
 
     let collection;
     switch(typeOfMember) {
@@ -93,19 +72,34 @@ export function findRecordId(memberName, typeOfMember) {
         default:
             collection = 'current';
     }
-    
-    /*let memberIndex = thisArg.state[collection].indexOf(
-        thisArg.state[collection].find(
+
+    let memberIndex = store.getState().memberCollections[collection].indexOf(
+        store.getState().memberCollections[collection].find(
             (memberObj) => memberObj.name === memberName
         )
-    );*/
+    );
 
-    //return thisArg.state[collection][memberIndex]._id;
+    console.log(typeOfMember);
+    console.log(memberIndex);
+    console.log(store.getState().memberCollections[collection]);//[memberIndex]['_id']);
+
+    //return store.getState().memberCollections[collection][memberIndex]['_id'];
     return 'ha';
 }
 
 export function updateMember(memberData, recordId) {
-    
+    /*
+    switch(memberData.status) {
+        case 'Honorary':
+            makeARequest('PUT', memberData, 'honorary', recordId);
+        break;
+        case 'Alum':
+            makeARequest('PUT', memberData, 'alumni', recordId);
+        break;
+        default:
+            makeARequest('PUT', memberData, 'current', recordId);
+    }
+    */
 }
 
 export function deleteMember(memberData, recordId) {

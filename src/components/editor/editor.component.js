@@ -8,7 +8,7 @@ import DatePicker from '../date-picker/date-picker.component';
 import { show, hide } from '../../services/modals.service';
 import { createMember, updateMember, deleteMember, findRecordId } from '../../services/api.service';
 
-import { updateDateOfBirth, updateEnrollmentDate } from '../../actions';
+import { updateEditor, updateDateOfBirth, updateEnrollmentDate } from '../../actions';
 
 import { g, clone } from '../../assets/scripts/utils';
 
@@ -25,56 +25,8 @@ export default class Editor extends Component {
     }
 
     handleChange = (e) => {
-
         e.preventDefault();
-
-        switch(e.target.id) {
-            case 'name':
-                this.setState({ name: e.target.value });
-            break;
-            case 'status':
-                this.setState({ status: e.target.value });
-            break;
-            case 'cardNumber':
-                this.setState({ cardNumber: e.target.value });
-            break;
-            case 'id-number':
-                this.setState({ idNumber: e.target.value });
-            break;
-            case 'email':
-                this.setState({ email: e.target.value });
-            break;
-            case 'phone-number-home':
-                this.setState({ phoneNumberHome: e.target.value });
-            break;
-            case 'phone-number-mobile':
-                this.setState({ phoneNumberMobile: e.target.value });
-            break;
-            case 'major':
-                this.setState({ major: e.target.value });
-            break;
-            case 'address':
-                this.setState({ address: e.target.value });
-            break;
-            case 'sex':
-                this.setState({ sex: e.target.value });
-            break;
-            case 'type-of-blood':
-                this.setState({ typeOfBlood: e.target.value });
-            break;
-            case 'allergies':
-                this.setState({ allergies: e.target.value });
-            break;
-            case 'diseases':
-                this.setState({ diseases: e.target.value });
-            break;
-            case 'emergency-contact-1':
-                this.setState({ emergencyContact1: e.target.value });
-            break;
-            case 'emergency-contact-2':
-                this.setState({ emergencyContact2: e.target.value });
-            break;
-        }
+        this.store.dispatch(updateEditor(e.target.id, e.target.value));
     }
 
     discard() {
@@ -147,11 +99,16 @@ export default class Editor extends Component {
                 break;
                 default:
                     if (g('#status') !== 'past-candidate') {
-                        console.log(findRecordId(memberData.name, memberData.status));
-                        updateMember(memberData);
+                        updateMember(
+                            memberData,
+                            findRecordId(memberData.name, memberData.status, this.store)
+                        );
                     }
                     else {
-                        deleteMember(memberData);
+                        deleteMember(
+                            memberData,
+                            findRecordId(memberData.name, memberData.status, this.store)
+                        );
                     }
             }
         }
@@ -201,14 +158,14 @@ export default class Editor extends Component {
                                 <label htmlFor="status">Status</label>
                                 <select 
                                     className="selection" name="" id="status" 
-                                    value={this.state.status}
+                                    value={this.state.status.toLowerCase()}
                                 >
                                     <option value="active">Active</option>
                                     <option value="passive">Passive</option>
                                     <option value="candidate">Candidate</option>
                                     <option value="candidate-star">Candidate*</option>
                                     <option value="honorary">Honorary</option>
-                                    <option value="alumni">Alumni</option>
+                                    <option value="alum">Alum</option>
                                     <option value="past-candidate">Past candidate (deletes the entry)</option>
                                 </select>
 

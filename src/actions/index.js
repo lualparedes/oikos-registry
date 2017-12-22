@@ -90,6 +90,13 @@ export function editRecord(e) {
     };
 }
 
+export function updateEditor(key, value) {
+    return {
+        type: 'UPDATE_EDITOR',
+        payload: { key, value }
+    }
+}
+
 export function updateDateOfBirth(newDateOfBirth) {
     return {
         type: 'UPDATE_DATE_OF_BIRTH',
