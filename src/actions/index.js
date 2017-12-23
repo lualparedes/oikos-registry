@@ -64,8 +64,8 @@ export function editRecord(e, store) {
         type: 'EDIT_RECORD',
         payload: {
             currentRecordInEdition: {
-                id: recordId,
-                originalStatus: record[1].innerHTML
+                id:                recordId,
+                originalStatus:    record[1].innerHTML
             },
             editor: {
                 title:             record[0].innerHTML,

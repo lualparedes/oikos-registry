@@ -69,7 +69,7 @@ td {
         background: $c-bg--dark;
     }
     &__row {
-        &:nth-child(odd) {
+        &:nth-child(even) {
             background: $c-bg;
         }
         &:hover {

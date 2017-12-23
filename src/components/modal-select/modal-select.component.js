@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './modal-select.component.css';
 
 import { hide } from '../../services/modals.service';
-import { createMember, updateMember, deleteMember } from '../../services/api.service';
+import { save } from '../../services/api.service';
 
 import { g } from '../../assets/scripts/utils';
 
@@ -18,18 +18,6 @@ export default class ModalSelect extends Component {
         hide('modalSelect');
         g('.editor-content').classList.remove('editor-content--active');
         g('.editor-footer').classList.remove('editor-footer--active');        
-    }
-
-    save() {
-
-        ///////////////////////////////////
-        // TODO:                         //
-        //     - database stuff          //
-        //     - check if there's a name //
-        ///////////////////////////////////
-
-        g('.editor-content').classList.remove('editor-content--active');
-        g('.editor-footer').classList.remove('editor-footer--active');
     }
 
     render() {
@@ -50,7 +38,7 @@ export default class ModalSelect extends Component {
                             </button>
                             <button 
                                 className="btn btn-option btn-option--main"
-                                onClick={this.save}
+                                onClick={() => save(this.store)}
                             >
                                 Save
                             </button>

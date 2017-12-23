@@ -8,9 +8,9 @@ import DatePicker from '../date-picker/date-picker.component';
 import { show, hide } from '../../services/modals.service';
 import { save } from '../../services/api.service';
 
-import { updateEditor, updateDateOfBirth, updateEnrollmentDate } from '../../actions';
+import { updateEditor } from '../../actions';
 
-import { g, clone } from '../../assets/scripts/utils';
+import { g } from '../../assets/scripts/utils';
 
 export default class Editor extends Component {
 

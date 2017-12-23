@@ -6,7 +6,6 @@ export function getMemberCollection(collectionName, store) {
 
     let req = new XMLHttpRequest();
         req.open('GET', 'https://ancient-lake-42168.herokuapp.com/'+collectionName+'-members');
-        //req.open('GET', 'http://localhost:8000/'+collectionName+'-members');
         req.onreadystatechange = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
@@ -25,7 +24,6 @@ export function getMemberCollection(collectionName, store) {
 function makeARequest(method, memberData, typeOfMember, memberId = '') {
     let req = new XMLHttpRequest();
         req.open(method, 'https://ancient-lake-42168.herokuapp.com/'+typeOfMember+'-members/'+memberId);
-        //req.open(method, 'http://localhost:8000/'+typeOfMember+'-members/'+memberId);
     if (method !== 'DELETE') {
         req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     }
