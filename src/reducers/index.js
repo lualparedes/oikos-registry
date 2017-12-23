@@ -6,7 +6,10 @@ const initialState = {
         honorary: [],
         alumni: []
     },
-    currentRecordInEdition: null,
+    currentRecordInEdition: {
+        id: null,
+        originalStatus: null
+    },
     editor: {
         title: 'Add new member',
         name: '',

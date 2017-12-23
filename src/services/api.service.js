@@ -5,6 +5,7 @@ export function getMemberCollection(collectionName, store) {
 
     let req = new XMLHttpRequest();
         req.open('GET', 'https://ancient-lake-42168.herokuapp.com/'+collectionName+'-members');
+        //req.open('GET', 'http://localhost:8000/'+collectionName+'-members');
         req.onreadystatechange = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
@@ -23,17 +24,22 @@ export function getMemberCollection(collectionName, store) {
 function makeARequest(method, memberData, typeOfMember, memberId = '') {
     let req = new XMLHttpRequest();
         req.open(method, 'https://ancient-lake-42168.herokuapp.com/'+typeOfMember+'-members/'+memberId);
+        //req.open(method, 'http://localhost:8000/'+typeOfMember+'-members/'+memberId);
+    if (method !== 'DELETE') {
         req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    }
         req.onreadystatechange = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
+                    console.log(typeOfMember);
+                    console.log(method);
                     console.log('The database update was successful');
                     hide('editor');
                     // =========================================================
                     //               🛠️ REFACTORING CANDIDATE 🛠️
                     // =========================================================
                     // Make it async!!!!
-                    window.location.reload();
+                    // window.location.reload();
                     // =========================================================
                 }
                 else {
@@ -41,7 +47,12 @@ function makeARequest(method, memberData, typeOfMember, memberId = '') {
                 }
             }
         };
+    if (method !== 'DELETE') {
         req.send(JSON.stringify(memberData));
+    }
+    else {
+        req.send();
+    }
 }
 
 // @notes
@@ -82,24 +93,28 @@ export function findRecordId(memberName, typeOfMember, store) {
     return store.getState().memberCollections[collection][memberIndex]['_id'];
 }
 
-export function updateMember(memberData, recordId) {
-
-    console.log(memberData.status);
-    console.log(recordId);
-    
-    switch(memberData.status) {
+export function updateMember(memberData, currentRecordInEdition) {
+    switch(currentRecordInEdition.originalStatus) {
         case 'Honorary':
-            makeARequest('PUT', memberData, 'honorary', recordId);
+            makeARequest('PUT', memberData, 'honorary', currentRecordInEdition.id);
         break;
         case 'Alum':
-            makeARequest('PUT', memberData, 'alumni', recordId);
+            makeARequest('PUT', memberData, 'alumni', currentRecordInEdition.id);
         break;
         default:
-            makeARequest('PUT', memberData, 'current', recordId);
+            makeARequest('PUT', memberData, 'current', currentRecordInEdition.id);
     }
-    
 }
 
-export function deleteMember(memberData, recordId) {
-    // body...
+export function deleteMember(memberData, currentRecordInEdition) {
+    switch(currentRecordInEdition.originalStatus) {
+        case 'Honorary':
+            makeARequest('DELETE', memberData, 'honorary', currentRecordInEdition.id);
+        break;
+        case 'Alum':
+            makeARequest('DELETE', memberData, 'alumni', currentRecordInEdition.id);
+        break;
+        default:
+            makeARequest('DELETE', memberData, 'current', currentRecordInEdition.id);
+    }
 }

@@ -12,22 +12,12 @@ import { updateEditor, updateDateOfBirth, updateEnrollmentDate } from '../../act
 
 import { g, clone } from '../../assets/scripts/utils';
 
-let i = 0;
-
 export default class Editor extends Component {
 
     constructor(props) {
         super(props);
         this.store = this.props.store;
         this.state = this.props.store.getState().editor;
-
-        this.timer = setInterval(() => {
-            console.log(this.store.getState().currentRecordInEdition);
-            i++;
-            if (i > 5) {
-                clearInterval(this.timer);
-            }
-        }, 3000);
     }
 
     componentWillReceiveProps() {
@@ -116,7 +106,7 @@ export default class Editor extends Component {
                     }
                 break;
                 default:
-                    if (g('#status') !== 'past-candidate') {
+                    if (g('#status').value !== 'past-candidate') {
                         updateMember(memberData, this.store.getState().currentRecordInEdition);
                         hide('editor');
                     }
