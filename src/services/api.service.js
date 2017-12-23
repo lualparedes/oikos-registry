@@ -31,15 +31,13 @@ function makeARequest(method, memberData, typeOfMember, memberId = '') {
         req.onreadystatechange = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
-                    console.log(typeOfMember);
-                    console.log(method);
                     console.log('The database update was successful');
                     hide('editor');
                     // =========================================================
                     //               🛠️ REFACTORING CANDIDATE 🛠️
                     // =========================================================
                     // Make it async!!!!
-                    // window.location.reload();
+                    window.location.reload();
                     // =========================================================
                 }
                 else {
@@ -53,21 +51,6 @@ function makeARequest(method, memberData, typeOfMember, memberId = '') {
     else {
         req.send();
     }
-}
-
-// @notes
-// [1] 'active', 'passive', 'candidate', 'candidate-star'
-export function createMember(memberData) {
-    switch(memberData.status) {
-        case 'Honorary':
-            makeARequest('POST', memberData, 'honorary');
-        break;
-        case 'Alum':
-            makeARequest('POST', memberData, 'alumni');
-        break;
-        default: // [1]
-            makeARequest('POST', memberData, 'current');
-    }    
 }
 
 export function findRecordId(memberName, typeOfMember, store) {
@@ -93,17 +76,60 @@ export function findRecordId(memberName, typeOfMember, store) {
     return store.getState().memberCollections[collection][memberIndex]['_id'];
 }
 
-export function updateMember(memberData, currentRecordInEdition) {
-    switch(currentRecordInEdition.originalStatus) {
+// @notes
+// [1] 'active', 'passive', 'candidate', 'candidate-star'
+export function createMember(memberData) {
+    switch(memberData.status) {
         case 'Honorary':
-            makeARequest('PUT', memberData, 'honorary', currentRecordInEdition.id);
+            makeARequest('POST', memberData, 'honorary');
         break;
         case 'Alum':
-            makeARequest('PUT', memberData, 'alumni', currentRecordInEdition.id);
+            makeARequest('POST', memberData, 'alumni');
         break;
-        default:
-            makeARequest('PUT', memberData, 'current', currentRecordInEdition.id);
+        default: // [1]
+            makeARequest('POST', memberData, 'current');
+    }    
+}
+
+// @notes
+// [1] No change in status → it stays in the same collection
+// [2] Current status belongs to current-members collection and new status also
+//     belongs to the same collection → it stays in the same collection
+export function updateMember(memberData, currentRecordInEdition) {
+
+    if (
+        (   // [1]
+            memberData.status === currentRecordInEdition.originalStatus
+        )
+        ||
+        (   // [2]
+            (currentRecordInEdition.originalStatus === 'Candidate' ||
+             currentRecordInEdition.originalStatus === 'Candidate*' ||
+             currentRecordInEdition.originalStatus === 'Active' ||
+             currentRecordInEdition.originalStatus === 'Passive')
+            &&
+            (memberData.status === 'Candidate' ||
+             memberData.status === 'Candidate*' ||
+             memberData.status === 'Active' ||
+             memberData.status === 'Passive')
+        )
+    ) { 
+        switch(currentRecordInEdition.originalStatus) {
+            case 'Honorary':
+                makeARequest('PUT', memberData, 'honorary', currentRecordInEdition.id);
+            break;
+            case 'Alum':
+                makeARequest('PUT', memberData, 'alumni', currentRecordInEdition.id);
+            break;
+            default:
+                makeARequest('PUT', memberData, 'current', currentRecordInEdition.id);
+        }
     }
+    else {
+        deleteMember(memberData, currentRecordInEdition);
+        createMember(memberData);
+    }
+    
 }
 
 export function deleteMember(memberData, currentRecordInEdition) {

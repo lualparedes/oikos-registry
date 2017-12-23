@@ -57,12 +57,8 @@ export function addNewRecord() {
 
 export function editRecord(e, store) {
 
-    console.log(store.currentRecordInEdition);
-
     let record = e.target.closest('.main-table__row').children;
     let recordId = findRecordId(record[0].innerHTML, record[1].innerHTML, store);
-
-    console.log(recordId);
 
     return {
         type: 'EDIT_RECORD',
