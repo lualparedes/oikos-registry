@@ -6,7 +6,7 @@ import ModalWarn from '../modal-warn/modal-warn.component';
 import DatePicker from '../date-picker/date-picker.component';
 
 import { show, hide } from '../../services/modals.service';
-import { createMember, updateMember, deleteMember} from '../../services/api.service';
+import { save } from '../../services/api.service';
 
 import { updateEditor, updateDateOfBirth, updateEnrollmentDate } from '../../actions';
 
@@ -33,89 +33,6 @@ export default class Editor extends Component {
         hide('editor');
         g('.editor-content').classList.remove('editor-content--active');
         g('.editor-footer').classList.remove('editor-footer--active');
-    }
-
-    convertStatus(statusValue) {
-        switch(statusValue) {
-            case 'active':
-                return 'Active';
-            break;
-            case 'passive':
-                return 'Passive';
-            break;
-            case 'candidate':
-                return 'Candidate';
-            break;
-            case 'candidate-star':
-                return 'Candidate*';
-            break;
-            case 'honorary':
-                return 'Honorary';
-            break;
-            case 'alum':
-                return 'Alum';
-            break;
-            case 'past-candidate':
-                return 'Past candidate (deletes the entry)';
-            break;
-        }
-    }
-
-    save = () => {
-        let atLeastItHasTheName = (g('#name').value === '') ? false : true;
-
-        if (!atLeastItHasTheName) {
-            show('modalWarn');
-        }
-        else {
-            let memberData = {
-                name: g('#name').value,
-                status: this.convertStatus(g('#status').value),
-                cardNumber: g('#card-number').value,
-                idNumber: g('#id-number').value,
-                email: g('#email').value,
-                phoneNumberHome: g('#phone-number-home').value,
-                phoneNumberMobile: g('#phone-number-mobile').value,
-                major: g('#major').value,
-                address: g('#address').value,
-                sex: g('#sex').value.toUpperCase(),
-                dateOfBirth: {
-                    day: g('#date-of-birth-day').value,
-                    month: g('#date-of-birth-month').value,
-                    year: g('#date-of-birth-year').value
-                },
-                typeOfBlood: g('#type-of-blood').value.toUpperCase(),
-                allergies: g('#allergies').value,
-                diseases: g('#diseases').value,
-                emergencyContact1: g('#emergency-contact-1').value,
-                emergencyContact2: g('#emergency-contact-2').value,
-                enrollmentDate: {
-                    day: g('#enrollment-date-day').value,
-                    month: g('#enrollment-date-month').value,
-                    year: g('#enrollment-date-year').value
-                }
-            };
-            switch(g('.editor-header__title').innerHTML) {
-                case 'Add new member':
-                    if (g('#status').value !== 'past-candidate') {
-                        createMember(memberData);
-                        hide('editor');
-                    }
-                    else {
-                        this.discard();
-                    }
-                break;
-                default:
-                    if (g('#status').value !== 'past-candidate') {
-                        updateMember(memberData, this.store.getState().currentRecordInEdition);
-                        hide('editor');
-                    }
-                    else {
-                        deleteMember(memberData, this.store.getState().currentRecordInEdition);
-                        hide('editor');
-                    }
-            }
-        }
     }
 
     // @notes
@@ -289,7 +206,7 @@ export default class Editor extends Component {
                                 </button>
                                 <button 
                                     className="btn btn-option btn-option--main"
-                                    onClick={this.save}
+                                    onClick={() => save(this.store)}
                                 >
                                     Save
                                 </button>

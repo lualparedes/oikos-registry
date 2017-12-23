@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './modal-select.component.css';
 
 import { hide } from '../../services/modals.service';
+import { createMember, updateMember, deleteMember } from '../../services/api.service';
 
 import { g } from '../../assets/scripts/utils';
 
