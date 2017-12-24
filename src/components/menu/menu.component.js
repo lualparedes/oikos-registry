@@ -45,26 +45,26 @@ export default class Menu extends Component {
                     <span>Add new</span>
                 </button>
                 <ul className="menu-items">
-                    <Route exact={true} path="/" render={() => ([
-                        <Link to="/"><li className="menu-items__item menu-items__item--selected">Current</li></Link>,
+                    <Route exact={true} path={process.env.PUBLIC_URL + '/'} render={() => ([
+                        <Link to={process.env.PUBLIC_URL + '/'}><li className="menu-items__item menu-items__item--selected">Current</li></Link>,
                         <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
                         <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
                         <Link to="all"><li className="menu-items__item">All</li></Link>,
                     ])}/>
-                    <Route path="/honorary" render={() => ([
-                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                    <Route path={process.env.PUBLIC_URL + '/honorary'} render={() => ([
+                        <Link to={process.env.PUBLIC_URL + '/'}><li className="menu-items__item">Current</li></Link>,
                         <Link to="honorary"><li className="menu-items__item menu-items__item--selected">Honorary</li></Link>,
                         <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
                         <Link to="all"><li className="menu-items__item">All</li></Link>,
                     ])}/>
-                    <Route path="/alumni" render={() => ([
-                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                    <Route path={process.env.PUBLIC_URL + '/alumni'} render={() => ([
+                        <Link to={process.env.PUBLIC_URL + '/'}><li className="menu-items__item">Current</li></Link>,
                         <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
                         <Link to="alumni"><li className="menu-items__item menu-items__item--selected">Alumni</li></Link>,
                         <Link to="all"><li className="menu-items__item">All</li></Link>,
                     ])}/>
-                    <Route path="/all" render={() => ([
-                        <Link to="/"><li className="menu-items__item">Current</li></Link>,
+                    <Route path={process.env.PUBLIC_URL + '/all'} render={() => ([
+                        <Link to={process.env.PUBLIC_URL + '/'}><li className="menu-items__item">Current</li></Link>,
                         <Link to="honorary"><li className="menu-items__item">Honorary</li></Link>,
                         <Link to="alumni"><li className="menu-items__item">Alumni</li></Link>,
                         <Link to="all"><li className="menu-items__item menu-items__item--selected">All</li></Link>,

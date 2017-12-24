@@ -61,22 +61,22 @@ export default class Main extends Component {
                         className="icon-menu main-header__icon"
                         onClick={this.showMenu}
                     ></span>
-                    <Route exact={true} path="/" render={() => (
+                    <Route exact={true} path={process.env.PUBLIC_URL + '/'} render={() => (
                         <h1 className="main-header__title">
                             Current members
                         </h1>
                     )}/>
-                    <Route exact={true} path="/honorary" render={() => (
+                    <Route exact={true} path={process.env.PUBLIC_URL + '/honorary'} render={() => (
                         <h1 className="main-header__title">
                             Honorary members
                         </h1>
                     )}/>
-                    <Route exact={true} path="/alumni" render={() => (
+                    <Route exact={true} path={process.env.PUBLIC_URL + '/alumni'} render={() => (
                         <h1 className="main-header__title">
                             Alumni members
                         </h1>
                     )}/>
-                    <Route exact={true} path="/all" render={() => (
+                    <Route exact={true} path={process.env.PUBLIC_URL + '/all'} render={() => (
                         <h1 className="main-header__title">
                             All members
                         </h1>
@@ -107,28 +107,28 @@ export default class Main extends Component {
                                         <th>Enrollment date</th>
                                     </tr>
                                 </thead>
-                                <Route exact={true} path="/" render={() => (
+                                <Route exact={true} path={process.env.PUBLIC_URL + '/'} render={() => (
                                     <tbody>
                                     {this.props.store.getState().memberCollections.current.map(
                                         (member) => returnRow(member, this)
                                     )}
                                     </tbody>
                                 )}/>
-                                <Route path="/honorary" render={() => (
+                                <Route path={process.env.PUBLIC_URL + '/honorary'} render={() => (
                                     <tbody>
                                     {this.props.store.getState().memberCollections.honorary.map(
                                         (member) => returnRow(member, this)
                                     )}
                                     </tbody>
                                 )}/>
-                                <Route path="/alumni" render={() => (
+                                <Route path={process.env.PUBLIC_URL + '/alumni'} render={() => (
                                     <tbody>
                                     {this.props.store.getState().memberCollections.alumni.map(
                                         (member) => returnRow(member, this)
                                     )}
                                     </tbody>
                                 )}/>
-                                <Route path="/all" render={() => (
+                                <Route path={process.env.PUBLIC_URL + '/all'} render={() => (
                                     <tbody>
                                     {this.props.store.getState().memberCollections.current.map(
                                         (member) => returnRow(member, this)
